@@ -19,6 +19,16 @@ import RadioForm, {
 
 //import { block } from 'react-native-reanimated';
 
+
+
+//-------------------------------------------------------------------------------------------------------------
+//screens
+//-------------------------------------------------------------------------------------------------------------
+
+//import SigninPage from './routes/SigninPage'
+//import SignupPage from './routes/SignupPage'
+
+
 //-------------------------------------------------------------------------------------------------------------
 //GLOBAL
 //-------------------------------------------------------------------------------------------------------------
@@ -261,7 +271,7 @@ function CustomDrawerContent(props) {
   )   
 }
 
-
+//1
 
 function CustomView({navigation,initialParams})
 {
@@ -270,7 +280,7 @@ function CustomView({navigation,initialParams})
       <FlatList
         keyExtractor = {(item) => item.id}
         data = {initialParams}
-        renderItem = {({item}) => (
+        renderItem = {({item}) => (//12
           <TouchableOpacity style = {styles.card} onPress = {() => navigation.navigate('Selected',{'item':item})}>
             <Image
               style={{width:100,height:100, resizeMode: 'stretch'}}
@@ -337,12 +347,10 @@ function CustomViewForPoll({navigation,initialParams})
                 />
                   <Text style={{paddingLeft:3}}>25+</Text>
                 </View>
-                <TouchableOpacity style={{flex:1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}
-                          
-                          onPress = {() => {
+                <TouchableOpacity style={{flex:1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}                       
+                          onPress = {() => {//12
                           navigation.navigate('SelectedToVote',{'item':item, 'value':votevalue})}}
                           >
-
                   <Text >More</Text>
                   <Image
                     style={{width:20,height:20,padding:3}}
@@ -430,18 +438,8 @@ function ProfileScreen()
 {                       
   return(
     <View style={styles.container}>
-      <FlatList
-        keyExtractor = {(item) => item.id}
-        data = {polllist}
-        renderItem = {({item}) => (
-          <View style = {styles.card} onPress = {() => navigation.navigate('Selected',{'item':item})}>
-            <View>
-            
-            </View>
-
-          </View>
-        )}
-      />
+<Text
+>     kljh</Text>
     </View>
   )
 }
@@ -463,8 +461,6 @@ function NotificationsScreen({ navigation }) {
     </View>
   );
 }
-
-
 class ExploreScreen extends Component {  
   state = {  
       switchValue: null  
@@ -480,15 +476,14 @@ class ExploreScreen extends Component {
                   value={this.state.switchValue}  
                   onValueChange ={(switchValue)=>{this.setState({switchValue})
                   console.log(this.state.switchValue)}}/>  
-                  
           </View>  
       );  
   }  
 }  
 
 //          <CustomView  navigation = {navigation} initialParams = {route.params.view} />
+//*
 
-//3
 function HomeScreen({route,navigation}) {
   return (
       <SafeAreaView style={{flex:1}}>
@@ -511,39 +506,372 @@ function PollScreen({route,navigation}) {
 //      <Text>{route.params.item.question}</Text>
 //<Text>{route.params.value}</Text>
 
-function VoteScreen({route,navigation})
-{//11
 
-  const [vote,setvote] = useState(true)
-  const [comments,setcomments] = useState(null)
-  return(
-    <View style = {{flex:1,justifyContent:'center',alignItems:'center'}}>
-    {vote && <TouchableOpacity style={{width:100,height:50,backgroundColor:'pink'}}
-            onPress = {()=> {
-              setvote(null)
-              setcomments(true)
-            }}>
-  
-    <Text>vote</Text>
 
-    </TouchableOpacity>
-    }
+{
+  /*
+  (
+    <View style = {{flex:1,marginTop:10,marginRight:20,justifyContext:'center',marginBottom:10}}>
+      <View style={{flex:.5,height:150,flexDirection:'row',paddingLeft:10,paddingTop:10,height:200}}>
+        <Image
+          style={{width:100,height:100,marginLeft:5}}
+          source = {require('./src/image/admk.jpg')}        
+        />
+        <Text style={{width:240,fontSize:17,height:50,marginLeft:10,marginRight:20}}>{route.params.item.question}</Text>
+      </View>
+      <View horizontal = {true} style={{flex:2.5,paddingLeft:10,paddingTop:10,height:150}}>
+        <View style={{flex:.7,flexDirection:'row'}}>
+          <RadioForm
 
-    <Text>{route.params.item.question}</Text>
-<Text>{route.params.value}</Text>
+          
+          Color ={'black'}
+            buttonSize = {25}
+            buttonOuterSize = {26}
+            style={{borderColor:'black',borderWidth:1,width:329}}
+            radio_props={route.params.item.options}
+            onPress = {(value) =>{
+              setvotevalue(value)//2
+            }}//vote
+            //style ={{flex:1.5,justifyContent:'center',paddingRight:14,paddingLeft:2}}
+            initial = {-1}
+          />
+        </View> 
+        <TouchableOpacity style={{backgroundColor:'pink',flex:.25,borderRadius:10,paddingBottom:1,alignItem:'center',justifyContent:'center'}}
+                  onPress = {()=> {
+                    setvote(null)
+                    setcomments(true)
+                  }}>  
+            <Text>vote</Text>
+          </TouchableOpacity>
+        </View>    
+        <View style={{width:329,height:50,flex:1,backgroundColor:'red'}}></View>  
 
-    {comments && <View style={{width:100,height:50,backgroundColor:'red'}}></View>     
-    }
+    
     </View>
+  )
+  */
+}
+
+function VoteScreen({route,navigation})
+{
+  const isPollContextContext = useContext(isPollContext)
+  const [vote,setvote] = useState(true)
+  return(
+    <SafeAreaView style={{flex:1,alignItem:'center',justifyContent:'center',backgroundColor:'white'}}>
+        <Customheader title = "Home Details" isHome = {false} navigation = {navigation} />
+
+        <View style={{flex:.7,alignItem:'center',flexDirection:'row',justifyContent:'center',backgroundColor:'white',marginBottom:5,marginTop:10,marginLeft:10,marginRight:10}}>
+            <Image
+            style={{width:105,height:105,marginLeft:5}}
+            source = {require('./src/image/admk.jpg')}        
+          />
+
+          <ScrollView style={{marginTop:3, alignContent:'center',height:115}}>
+            <Text style={{fontSize:14,marginLeft:10,marginRight:20}}>{route.params.item.question}</Text>
+          </ScrollView>
+
+        </View>
+
+       {vote && <View style={{flex:1.5,alignItem:'center',justifyContent:'center',backgroundColor:'white',marginBottom:5,marginTop:6,marginLeft:10,marginRight:10}}>
+            <View style={{flex:1,paddingLeft:10,paddingRight:10,paddingTop:10,backgroundColor:'white',marginBottom:5}}>
+                <RadioForm
+                buttonColor ={'black'}
+                buttonSize = {25}
+                buttonOuterSize = {26}
+                style={{width:319}}
+                radio_props={route.params.item.options}
+                onPress = {(value) =>{
+                  setvotevalue(value)//2
+                }}//vote
+                //style ={{flex:1.5,justifyContent:'center',paddingRight:14,paddingLeft:2}}
+                initial = {-1}
+              />
+            </View>
+              <Button
+              title="Learn More"
+              color="#FF69B4"
+              onPress={()=>{ setvote(false)
+              }}
+              />            
+        </View>}
+        {!vote && <View style={{flex:1.5,alignItem:'center',justifyContent:'center',backgroundColor:'white',marginBottom:5,marginTop:6,marginLeft:10,marginRight:10}}>
+            <View style={{flex:1,paddingLeft:10,paddingRight:10,paddingTop:10,backgroundColor:'white',marginBottom:5}}>
+            {
+              //starts here
+            }
+                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
+                  <View style = {{backgroundColor:'white',height:40,justifyContent:'center',}}>
+                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
+                        <Image
+                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
+                            source = {require('./src/image/radio-on-button.png')}        
+                          />
+                        <Text style={{paddingLeft:8}}>{route.params.item.options[0].label}</Text>
+
+                      </View>
+                  </View>
+                  <View style = {{backgroundColor:'green',height:5,width:50,borderRadius:5,}}>
+                  </View>
+                </View>
+            {
+              //ends here
+            }
+            {
+              //starts here
+            }
+                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
+                  <View style = {{backgroundColor:'white',height:40,justifyContent:'center',}}>
+                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
+                        <Image
+                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
+                            source = {require('./src/image/radio-on-button.png')}        
+                          />
+                        <Text style={{paddingLeft:8}}>{route.params.item.options[1].label}</Text>
+
+                      </View>
+                  </View>
+                  <View style = {{backgroundColor:'orange',height:5,width:300,borderRadius:5,}}>
+                  </View>
+                </View>
+            {
+              //ends here
+            }
+
+            {
+              //starts here
+            }
+                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
+                  <View style = {{backgroundColor:'white',height:40,justifyContent:'center',}}>
+                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
+                        <Image
+                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
+                            source = {require('./src/image/radio-on-button.png')}        
+                          />
+                        <Text style={{paddingLeft:8}}>{route.params.item.options[2].label}</Text>
+
+                      </View>
+                  </View>
+                  <View style = {{backgroundColor:'blue',height:5,width:200,borderRadius:5,}}>
+                  </View>
+                </View>
+            {
+              //ends here
+            }
+
+            {
+              //starts here
+            }
+                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
+                  <View style = {{backgroundColor:'white',height:40,justifyContent:'center',}}>
+                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
+                        <Image
+                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
+                            source = {require('./src/image/radio-on-button.png')}        
+                          />
+                        <Text style={{paddingLeft:8}}>{route.params.item.options[3].label}</Text>
+
+                      </View>
+                  </View>
+                  <View style = {{backgroundColor:'red',height:5,width:250,borderRadius:5,}}>
+                  </View>
+                </View>
+            {
+              //ends here
+            }
+
+
+            </View>
+        </View>}
+        {vote && <View style={{flex:2,backgroundColor:'white',marginBottom:5,marginTop:6,marginLeft:10,marginRight:10}}>
+
+        </View>
+        }
+        {!vote && <View style={{flex:2,backgroundColor:'white',marginBottom:5,marginTop:6,marginLeft:10,marginRight:10}}>
+          <View style = {{marginLeft:10,marginTop:10}}>
+            <Text style = {{color:'gray'}}>Comments</Text>
+            <ScrollView>
+                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
+                  <View style = {{backgroundColor:'white',height:60,justifyContent:'center',}}>
+                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
+                        <Image
+                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
+                            source = {require('./src/image/profile.png')}        
+                          />
+                        <Text style={{ flex:1,paddingLeft:8,paddingRight:8 ,flexDirection:'row'}}>sdfassafdasafafafafdsgsdgsdgsddddddddddddssfasfaf</Text>
+
+                      </View>
+                  </View>
+                </View>
+                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
+                  <View style = {{backgroundColor:'white',height:60,justifyContent:'center',}}>
+                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
+                        <Image
+                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
+                            source = {require('./src/image/profile.png')}        
+                          />
+                        <Text style={{ flex:1,paddingLeft:8,paddingRight:8 ,flexDirection:'row'}}>sdfassafdasafafafafdsgsdgsdgsddddddddddddssfasfaf</Text>
+
+                      </View>
+                  </View>
+                </View>
+                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
+                  <View style = {{backgroundColor:'white',height:60,justifyContent:'center',}}>
+                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
+                        <Image
+                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
+                            source = {require('./src/image/profile.png')}        
+                          />
+                        <Text style={{ flex:1,paddingLeft:8,paddingRight:8 ,flexDirection:'row'}}>sdfassafdasafafafafdsgsdgsdgsddddddddddddssfasfaf</Text>
+
+                      </View>
+                  </View>
+                </View>
+                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
+                  <View style = {{backgroundColor:'white',height:60,justifyContent:'center',}}>
+                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
+                        <Image
+                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
+                            source = {require('./src/image/profile.png')}        
+                          />
+                        <Text style={{ flex:1,paddingLeft:8,paddingRight:8 ,flexDirection:'row'}}>sdfassafdasafafafafdsgsdgsdgsddddddddddddssfasfaf</Text>
+
+                      </View>
+                  </View>
+                </View>
+                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
+                  <View style = {{backgroundColor:'white',height:60,justifyContent:'center',}}>
+                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
+                        <Image
+                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
+                            source = {require('./src/image/profile.png')}        
+                          />
+                        <Text style={{ flex:1,paddingLeft:8,paddingRight:8 ,flexDirection:'row'}}>sdfassafdasafafafafdsgsdgsdgsddddddddddddssfasfaf</Text>
+
+                      </View>
+                  </View>
+                </View>
+                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
+                  <View style = {{backgroundColor:'white',height:60,justifyContent:'center',}}>
+                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
+                        <Image
+                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
+                            source = {require('./src/image/profile.png')}        
+                          />
+                        <Text style={{ flex:1,paddingLeft:8,paddingRight:8 ,flexDirection:'row'}}>sdfassafdasafafafafdsgsdgsdgsddddddddddddssfasfaf</Text>
+
+                      </View>
+                  </View>
+                </View>
+                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
+                  <View style = {{backgroundColor:'white',height:60,justifyContent:'center',}}>
+                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
+                        <Image
+                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
+                            source = {require('./src/image/profile.png')}        
+                          />
+                        <Text style={{ flex:1,paddingLeft:8,paddingRight:8 ,flexDirection:'row'}}>sdfassafdasafafafafdsgsdgsdgsddddddddddddssfasfaf</Text>
+
+                      </View>
+                  </View>
+                </View>
+                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
+                  <View style = {{backgroundColor:'white',height:60,justifyContent:'center',}}>
+                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
+                        <Image
+                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
+                            source = {require('./src/image/profile.png')}        
+                          />
+                        <Text style={{ flex:1,paddingLeft:8,paddingRight:8 ,flexDirection:'row'}}>sdfassafdasafafafafdsgsdgsdgsddddddddddddssfasfaf</Text>
+
+                      </View>
+                  </View>
+                </View>
+
+            </ScrollView>
+          </View>
+        </View>
+        }
+
+        {!vote &&
+          <View style={{flex:.5,alignItem:'center',justifyContent:'center',backgroundColor:'white',marginTop:5,}}>
+              <View style={{flex:1,flexDirection:'row'}}>
+                <View style={{alignItem:'center',justifyContent:'center',marginLeft:10}}>
+                  <TextInput
+                          style={{color:'blue', borderBottomWidth: .5,borderBottomColor:'#DCDCDC  ',borderRadius:20,borderWidth:2,width:275}}
+                          placeholder='sdfdfafasf'
+                      />      
+                </View>
+                <View style={{alignItem:'center',justifyContent:'center',marginLeft:7}}
+                >
+                  <Image
+                      style={{width:30,height:30, alignContent:'center' , resizeMode: 'stretch'}}
+                      source = {require('./src/image/paper-plane.png')}        
+                    />
+                </View>
+              </View>
+            </View>
+        }
+    </SafeAreaView>
   )
 }
 
+//fun
 
 
+function DetailedScreen({route,navigation})
+{
+
+  const [vote,setvote] = useState(true)
+  const [customview,setcustomview] = useState(true)
+  const isPollContextContext = useContext(isPollContext)
+
+  return(
+    <SafeAreaView style={{flex:1,alignItem:'center',justifyContent:'center',backgroundColor:'white'}}>
+    
+        <View style={{flex:.7,alignItem:'center',flexDirection:'row',justifyContent:'center',backgroundColor:'white',marginBottom:5,marginTop:6,marginLeft:10,marginRight:10}}>
+          <View style={{justifyContent:'center'}}>
+            <Image
+            style={{width:105,height:105,marginLeft:5}}
+            source = {require('./src/image/admk.jpg')}        
+          />
+
+          </View>
+          <ScrollView style={{marginTop:3, alignContent:'center',height:115}}>
+            <Text style={{fontSize:14,marginLeft:10,marginRight:20}}>mm</Text>
+
+          </ScrollView>
+
+        </View>
+
+       <View style={{flex:1.5,alignItem:'center',justifyContent:'center',backgroundColor:'white',marginBottom:5,marginTop:6,marginLeft:10,marginRight:10}}>
+            <View style={{flex:1.5,alignItem:'center',justifyContent:'center',backgroundColor:'white',marginBottom:5}}>
+
+            </View>
+            <View style={{flex:.5,alignItem:'center',justifyContent:'center',backgroundColor:'white',marginTop:5,}}>
+              <View style={{flex:1,flexDirection:'row'}}>
+                <View style={{alignItem:'center',justifyContent:'center',marginLeft:10}}>
+                  <TextInput
+                          style={{color:'blue', borderBottomWidth: .5,borderBottomColor:'#DCDCDC  ',borderRadius:20,borderWidth:2,width:275}}
+                          placeholder='sdfdfafasf'
+                      />      
+                </View>
+                <View style={{alignItem:'center',justifyContent:'center',marginLeft:7}}
+                >
+                  <Image
+                      style={{width:30,height:30, alignContent:'center' , resizeMode: 'stretch'}}
+                      source = {require('./src/image/paper-plane.png')}        
+                    />
+                </View>
+              </View>
+            </View>
+        </View>
+    </SafeAreaView>
+  )
+}
+//1
 function ViewScreen({ route,navigation }) {
   console.log("hloo")
   console.log("bye")
-  
   return (
     <SafeAreaView style={{flex:1}}>
     <Customheader title = "Home Details" isHome = {false} navigation = {navigation} />
@@ -581,7 +909,7 @@ function ViewScreen({ route,navigation }) {
             onPress = {()=> {
 
               navigation.navigate('CreateScreen',{
-                                                    screen : 'CreatePolls', 
+                                                    screen : 'CreatePolls', //12
                                                     params :{
                                                       istab: false,
                                                       category: route.params.item.category, 
@@ -629,8 +957,6 @@ function ViewScreen({ route,navigation }) {
 
 function CreatePollScreen({route,navigation}) 
 {
-
-
 //  navigation.navigate('CreateScreen',{"subCategory": route.params.item.subCategory,"Category":route.params.item.Category})
 
       const [modalVisible, setModalVisible] = useState(false);
@@ -895,6 +1221,32 @@ function CreatePollScreen({route,navigation})
     }
 
 
+
+
+function CreatePollToggleScreen({route,navigation}) 
+{//12
+      return (  
+        <SafeAreaView style={{flexDirection:'column',flex:1}}>
+            <View style={{flexDirection:'row',flex:1}}>
+                <TouchableOpacity style={{flex: 1, justifyContent: 'center', marginLeft:20 }}
+                                  onPress={() => navigation.goBack()}//!
+                                  >  
+                  <Image
+                  style={{width:25,height:25,marginLeft:5}}
+                  source = {require('./src/image/close.png')}
+                />
+                </TouchableOpacity>  
+                <View style={{flex: 1,justifyContent:'center'}}>  
+                  
+                  <TouchableOpacity style={{height:45,width:100,marginLeft:57,backgroundColor:'#FF69B4',borderRadius:20,alignItems:'center',justifyContent:'center'}}>
+                      <Text style={{color:'white',fontWeight:'bold',fontSize:17}}>Post</Text>
+                  </TouchableOpacity>
+                </View>  
+            </View>  
+          </SafeAreaView> 
+      )
+} 
+
 //--------------------------------------------------------------------------------------------------------------
 //style collections
 //--------------------------------------------------------------------------------------------------------------
@@ -997,14 +1349,13 @@ modalText: {
 
 //--------------------------------------------------------------------------------------------------------------
 //stack collections
-//--------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------- ---------------------------------------------------
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName = "DrawerView">
         <Stack.Screen name="DrawerView" component={DrawerNavigation} options ={navOptionHandler}/>
-        <Stack.Screen name="ViewScreen" component={ViewScreen} options ={navOptionHandler}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -1012,8 +1363,7 @@ export default function App() {
 
 //1
 function DrawerNavigation(props)
-{
-  
+{//12
   return(
     <isPollContext.Provider value = {props}>
       <Drawer.Navigator initialRouteName="Cricket"
@@ -1022,11 +1372,13 @@ function DrawerNavigation(props)
         <Drawer.Screen name="Politics" component={TabNavigation} initialParams = {{screen:'HomeTab',params:{screen:'Home',params:{tab:politices,view:politicspeople}}}}/>
         <Drawer.Screen name="Corona" component={TabNavigation} initialParams = {{screen:'HomeTab',params:{screen:'Home',params:{tab:corona,view:coronapeople}}}} />    
         <Drawer.Screen name="Selected" component={ViewScreen} />
-        <Drawer.Screen name="SelectedToVote" component={VoteScreen} />
+        <Drawer.Screen name="SelectedToVote" component={VoteScreen}/>
+        <Drawer.Screen name="SelectedToDetail" component={DetailedScreen} />
         <Drawer.Screen name="CreateScreen" component={CreatePollStack}/>
         <Drawer.Screen name="CricketNews" component={TabNavigation} initialParams = {{screen:'HomeTab',params:{screen:'polls',params:{tab:cricket,view:peoplenews}}}}/>
         <Drawer.Screen name="PoliticsNews" component={TabNavigation} initialParams = {{screen:'HomeTab',params:{screen:'polls',params:{tab:politices,view:politicspeoplenews}}}}/>
         <Drawer.Screen name="CoronaNews" component={TabNavigation} initialParams = {{screen:'HomeTab',params:{screen:'polls',params:{tab:corona,view:coronapeoplenews}}}} />    
+
       </Drawer.Navigator>
       </isPollContext.Provider>
 
@@ -1067,10 +1419,12 @@ function ExploreStack(){
   )
 }
 
-function CreatePollStack(){
+function CreatePollStack(){//12
   return  (
-    <Stack.Navigator initialRouteName = "CreatePolls">
+    <Stack.Navigator >
       <Stack.Screen name="CreatePolls" component={CreatePollScreen} options ={navOptionHandler}/>
+      <Stack.Screen name="CreatePollToggle" component={CreatePollToggleScreen} options ={navOptionHandler}/>
+
     </Stack.Navigator>
   )
 }
