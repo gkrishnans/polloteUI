@@ -22,17 +22,10 @@ import RadioForm, {
 
 
 //-------------------------------------------------------------------------------------------------------------
-//screens
-//-------------------------------------------------------------------------------------------------------------
-
-//import SigninPage from './routes/SigninPage'
-//import SignupPage from './routes/SignupPage'
-
-
-//-------------------------------------------------------------------------------------------------------------
 //GLOBAL
 //-------------------------------------------------------------------------------------------------------------
 
+const axios = require('axios');
 
 const isPollContext = createContext(true)
 
@@ -549,6 +542,7 @@ function PollScreen({route,navigation}) {
     
     </View>
   )
+  
   */
 }
 
@@ -558,8 +552,7 @@ function VoteScreen({route,navigation})
   const [vote,setvote] = useState(true)
   return(
     <SafeAreaView style={{flex:1,alignItem:'center',justifyContent:'center',backgroundColor:'white'}}>
-        <Customheader title = "Home Details" isHome = {false} navigation = {navigation} />
-
+    
         <View style={{flex:.7,alignItem:'center',flexDirection:'row',justifyContent:'center',backgroundColor:'white',marginBottom:5,marginTop:10,marginLeft:10,marginRight:10}}>
             <Image
             style={{width:105,height:105,marginLeft:5}}
@@ -690,54 +683,6 @@ function VoteScreen({route,navigation})
           <View style = {{marginLeft:10,marginTop:10}}>
             <Text style = {{color:'gray'}}>Comments</Text>
             <ScrollView>
-                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
-                  <View style = {{backgroundColor:'white',height:60,justifyContent:'center',}}>
-                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
-                        <Image
-                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
-                            source = {require('./src/image/profile.png')}        
-                          />
-                        <Text style={{ flex:1,paddingLeft:8,paddingRight:8 ,flexDirection:'row'}}>sdfassafdasafafafafdsgsdgsdgsddddddddddddssfasfaf</Text>
-
-                      </View>
-                  </View>
-                </View>
-                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
-                  <View style = {{backgroundColor:'white',height:60,justifyContent:'center',}}>
-                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
-                        <Image
-                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
-                            source = {require('./src/image/profile.png')}        
-                          />
-                        <Text style={{ flex:1,paddingLeft:8,paddingRight:8 ,flexDirection:'row'}}>sdfassafdasafafafafdsgsdgsdgsddddddddddddssfasfaf</Text>
-
-                      </View>
-                  </View>
-                </View>
-                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
-                  <View style = {{backgroundColor:'white',height:60,justifyContent:'center',}}>
-                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
-                        <Image
-                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
-                            source = {require('./src/image/profile.png')}        
-                          />
-                        <Text style={{ flex:1,paddingLeft:8,paddingRight:8 ,flexDirection:'row'}}>sdfassafdasafafafafdsgsdgsdgsddddddddddddssfasfaf</Text>
-
-                      </View>
-                  </View>
-                </View>
-                <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
-                  <View style = {{backgroundColor:'white',height:60,justifyContent:'center',}}>
-                      <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
-                        <Image
-                            style={{width:25,height:25, alignContent:'center' , resizeMode: 'stretch'}}
-                            source = {require('./src/image/profile.png')}        
-                          />
-                        <Text style={{ flex:1,paddingLeft:8,paddingRight:8 ,flexDirection:'row'}}>sdfassafdasafafafafdsgsdgsdgsddddddddddddssfasfaf</Text>
-
-                      </View>
-                  </View>
-                </View>
                 <View style = {{borderRadius:5,height:50,paddingBottom:20}}>
                   <View style = {{backgroundColor:'white',height:60,justifyContent:'center',}}>
                       <View style={{flex:1,flexDirection:'row',marginTop:7,marginLeft:3}}>
@@ -1220,9 +1165,6 @@ function CreatePollScreen({route,navigation})
       );  
     }
 
-
-
-
 function CreatePollToggleScreen({route,navigation}) 
 {//12
       return (  
@@ -1246,6 +1188,236 @@ function CreatePollToggleScreen({route,navigation})
           </SafeAreaView> 
       )
 } 
+
+
+{
+  /*
+      constructor(props)
+    {
+      super(props);
+      this.state = {
+        "username":"",
+        "email":"",
+        "password":"",
+    };
+    this.signupSubmit = this.signupSubmit.bind(this);
+    }
+    signupSubmit()
+    {
+      this.props.navigation.navigate('DrawerView');
+
+        axios     
+            .post('http://3.14.87.134:8080/api/signup',
+            {
+                    "username":this.state.username,
+                    "password":this.state.password,
+                    "email":this.state.email,
+            }            
+            ).then( response => {
+                console.log(response);
+                if(response['success'])
+                {
+
+                }
+                this.props.navigation.navigate('DrawerView');
+            })
+    }    
+    
+
+  
+  */
+}
+
+const UserDetailsData = {username:'' ,password:'',email:'',access_token:'',access_token_expiration_min:'',refresh_token:''}
+const userDetails = (state,action) =>{
+  return action
+}
+
+
+function signupSubmit(name,password,email,{navigation})
+{
+  //console.log(name,password,email)
+//    const [details,dispatch] = useReducer(UserDetailsData,userDetails)
+  //  const [access_token,setaccess_token] = useState('')
+   // const [refresh_token,setrefresh_token] = useState('')
+   /// const [access_token_expiration_min,setaccess_token_expiration_min] = useState('')
+    axios     
+        .post('http://3.14.87.134:8080/api/signup',
+        {
+                "username":name,
+                "password":password,
+                "email":email,
+        }            
+        ).then( response => {
+            if(response.data.success)
+            {
+              Alert.alert("Successfully signed in")
+              //setaccess_token(response['access_token'])         
+              //setrefresh_token(response['refresh_token'])
+              //setaccess_token_expiration_min(response['access_token_expiration_min'])  
+              navigation.navigate('DrawerView');
+            }
+            else
+            {
+              Alert.alert(response.data.message)
+            }
+        })
+}
+
+function SignupPage({navigation})
+{
+    const [name,setname] = useState('')
+    const [password,setpassword] = useState('')
+    const [email,setemail] = useState('')
+    return( 
+      
+            <View  style = {{flex : 1,flexDirection:'column',alignContent:'center',justifyContent:'center'}} > 
+            <View style={{flex : 1.5}}></View>
+            <View>
+            <TextInput style = {{ margin: 15,
+                    height: 60,
+                    borderBottomColor:'blue',
+                    borderBottomWidth:2,
+                    color:'blue',
+                  paddingBottom :10
+                  }}
+                  underlineColorAndroid = "transparent"
+                  placeholder = "username"
+                  placeholderTextColor = "#9a73ef"
+                  autoCapitalize = "none"
+                  onChangeText = {text => setname(text)}
+                  />                                
+            </View>
+
+            <View>
+            <TextInput style = {{  margin: 15,
+                  height: 60,
+                  borderBottomColor:'blue',
+                    borderBottomWidth:2,
+                  color:'blue',
+                  paddingBottom :10}}
+                  underlineColorAndroid = "transparent"
+                  placeholder = "your password"  
+                  placeholderTextColor = "#9a73ef"
+                  autoCapitalize = "none"
+                  onChangeText = {text => setpassword(text)}
+                  />                                         
+
+
+            </View>
+            <View>
+            <TextInput style = {{  margin: 15,
+                  height: 60,
+                  borderBottomColor:'blue',
+                    borderBottomWidth:2,
+                  color:'blue',
+                  paddingBottom :10}}
+                  underlineColorAndroid = "transparent"
+                  placeholder = "your email id"
+                  placeholderTextColor = "#9a73ef"
+                  autoCapitalize = "none"
+                  onChangeText = {text => setemail(text)}
+                  />               
+
+            </View>
+            <View style = {{paddingTop:20,paddingBottom:20}}>
+
+            <TouchableOpacity
+                      style={{marginLeft:20,marginRight:20,height:50,borderRadius:10,backgroundColor:'#FF69B4',alignContent:'center',justifyContent:'center'}}
+                      onPress ={ ()=>{
+                        signupSubmit(name,password,email,{navigation})
+                      }}
+                  >
+                  <Text style={{textAlign:'center',color:'white',fontSize:20}}>Submit</Text>
+                  </TouchableOpacity>                          
+            </View>
+
+            <View style = {{paddingTop:20,paddingBottom:20,flex:1,flexDirection:'row',justifyContent:"center"}}>
+                      <View><Text>Have an account</Text></View>
+
+              <TouchableOpacity
+                      style={{paddingLeft:20}}
+                      onPress ={()=>{navigation.navigate('signin')}}
+                  >
+                  <Text style={{color:'#FF69B4'}}>Sign in </Text>
+              </TouchableOpacity>                          
+            </View>
+         
+              </View>  
+        );
+    }
+
+  
+function call(response,{navigation})
+{
+  if(response.data.success)
+  {
+    navigation.navigate('DrawerView');
+  }
+  else
+  {
+    console.log('invalid user')
+    navigation.navigate('signup')
+  }
+}
+
+function signinSubmit(username,password,{navigation})
+{
+    axios     
+        .post('http://3.14.87.134:8080/api/signIn',
+        {
+                "username":username,
+                "password":password,
+        }            
+        ).then( response => {
+            call(response,{navigation});
+        })
+} 
+
+function SigninPage({navigation})
+{
+  const [username,setusername] = useState(0)
+  const [password,setpassword] = useState(0)
+  return( 
+      <View style = {styles.container1}>
+            <TextInput style = {{  margin: 15,
+                  height: 60,
+                  borderBottomColor:'blue',
+                    borderBottomWidth:2,
+                  color:'blue',
+                  paddingBottom :10}}
+                  underlineColorAndroid = "transparent"
+                  placeholder = "your password"  
+                  placeholderTextColor = "#9a73ef"
+                  autoCapitalize = "none"
+            onChangeText = {text => setusername(text)}
+            />                                         
+            <TextInput style = {{  margin: 15,
+                  height: 60,
+                  borderBottomColor:'blue',
+                    borderBottomWidth:2,
+                  color:'blue',
+                  paddingBottom :10}}
+                  underlineColorAndroid = "transparent"
+                  placeholder = "your password"  
+                  placeholderTextColor = "#9a73ef"
+                  autoCapitalize = "none"
+            onChangeText = {text => setpassword(text)}
+            />                                         
+          <Button title={"submit"} style = {styles.inputs} onPress={()=>signinSubmit(username,password,{naivgation})} />   
+          <View style = {{paddingTop:20,paddingBottom:20,flex:1,flexDirection:'row',justifyContent:"center"}}>
+                      <View><Text>Have an account</Text></View>
+
+              <TouchableOpacity
+                      style={{paddingLeft:20}}
+                      onPress ={()=>{navigation.navigate('signup')}}
+                  >
+                  <Text style={{color:'#FF69B4'}}>sign up </Text>
+              </TouchableOpacity>                          
+            </View>
+        </View>  
+  );
+}
 
 //--------------------------------------------------------------------------------------------------------------
 //style collections
@@ -1341,6 +1513,22 @@ textStyle: {
 modalText: {
   marginBottom: 15,
   textAlign: "center"
+},
+input: {
+  margin: 15,
+  height: 40,
+  borderColor: 'black',
+  borderWidth: 3,
+  color:'blue'
+},
+button:{
+backgroundColor:'#ff5c5c',
+},container1:
+{
+    flex:1,
+    justifyContent:'center',
+    padding:1,
+    borderBottomColor: 'black'           
 }
 
 })
@@ -1354,8 +1542,10 @@ modalText: {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName = "DrawerView">
+      <Stack.Navigator initialRouteName = "signup">
         <Stack.Screen name="DrawerView" component={DrawerNavigation} options ={navOptionHandler}/>
+        <Stack.Screen name="signup" component={SignupPage} options ={navOptionHandler}/>
+        <Stack.Screen name="signin" component={SigninPage} options ={navOptionHandler}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -1378,12 +1568,9 @@ function DrawerNavigation(props)
         <Drawer.Screen name="CricketNews" component={TabNavigation} initialParams = {{screen:'HomeTab',params:{screen:'polls',params:{tab:cricket,view:peoplenews}}}}/>
         <Drawer.Screen name="PoliticsNews" component={TabNavigation} initialParams = {{screen:'HomeTab',params:{screen:'polls',params:{tab:politices,view:politicspeoplenews}}}}/>
         <Drawer.Screen name="CoronaNews" component={TabNavigation} initialParams = {{screen:'HomeTab',params:{screen:'polls',params:{tab:corona,view:coronapeoplenews}}}} />    
-
       </Drawer.Navigator>
       </isPollContext.Provider>
-
   )
-
 }
 
 //      <Drawer.Screen name="CreateScreen" component={CreatePollStack} initialParams = {{screen : 'CreatePolls', params :{istab: true}}}/> worked
