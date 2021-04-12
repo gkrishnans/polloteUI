@@ -3,21 +3,20 @@
 //packages collections
 //--------------------------------------------------------------------------------------------------------------
 
-import { Text,TextInput, View ,SafeAreaView ,VirtualizedList,StyleSheet ,Image ,Button ,Pressable,Modal,ScrollView ,TouchableOpacity ,TouchableWithoutFeedback,Switch,Alert} from 'react-native';
-import { NavigationContainer,CommonActions, StackRouter } from '@react-navigation/native';
+import { Text,TextInput, View ,SafeAreaView ,StyleSheet ,Image ,Button ,Pressable,Modal,ScrollView ,TouchableOpacity ,Switch,Alert} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { FlatList } from 'react-native';
 import React,{useState,useContext, useReducer ,createContext,Component } from 'react'  
 import 'react-native-gesture-handler';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import RadioForm, {
   RadioButton,RadioButtonInput,
   RadioButtonLabel
 } from 'react-native-simple-radio-button'
-import { Touchable } from 'react-native';
+
 
 const axios = require('axios');
 
@@ -50,18 +49,8 @@ const peoplenews = [
   {question:'which app is the best for dream 11 prediction1',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
   {question:'which app is the best for dream 11 prediction2',key:1,id:'2',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
   {question:'which app is the best for dream 11 prediction3',key:1,id:'3',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'which app is the best for dream 11 prediction1',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'which app is the best for dream 11 prediction2',key:1,id:'2',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'which app is the best for dream 11 prediction3',key:1,id:'3',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'which app is the best for dream 11 prediction1',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'which app is the best for dream 11 prediction2',key:1,id:'2',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'which app is the best for dream 11 prediction3',key:1,id:'3',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'which app is the best for dream 11 prediction1',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'which app is the best for dream 11 prediction2',key:1,id:'2',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'which app is the best for dream 11 prediction3',key:1,id:'3',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
 
 ]
-
 
 
 const cricket = [
@@ -80,19 +69,7 @@ const politicspeople = [
 ]
 
 const politicspeoplenews = [
-  {question:'politics 1',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'politics 1'},{value:'b',label:'politics 11'},{value:'c',label:'politics 111'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'politics 2',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'politics 3',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'politics 1',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'politics 1'},{value:'b',label:'politics 11'},{value:'c',label:'politics 111'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'politics 2',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'politics 3',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'politics 1',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'politics 1'},{value:'b',label:'politics 11'},{value:'c',label:'politics 111'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'politics 2',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'politics 3',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'politics 1',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'politics 1'},{value:'b',label:'politics 11'},{value:'c',label:'politics 111'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'politics 2',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'politics 3',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'politics 1',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'politics 1'},{value:'b',label:'politics 11'},{value:'c',label:'politics 111'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
+  {question:'politics 1',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
   {question:'politics 2',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
   {question:'politics 3',key:1,id:'1',category:'politics',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
 
@@ -116,21 +93,6 @@ const coronapeople  = [
 ]
 
 const coronapeoplenews  = [
-  {question:'corona 1',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 2',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 3',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 1',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 2',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 3',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 1',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 2',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 3',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 1',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 2',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 3',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 1',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 2',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
-  {question:'corona 3',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
   {question:'corona 1',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
   {question:'corona 2',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
   {question:'corona 3',key:1,id:'1',category:'Cricket',subcategory:'Test Cricket',options:[{value:'a',label:'live score'},{value:'b',label:'dream 11'},{value:'c',label:'playing 11'},{value:'d',label:'predictionhub'}],img: require('./src/image/16DanLawrence.jpg')},
@@ -203,7 +165,6 @@ function Customheader({title,isHome,navigation,category})
   )
 }
 
-
 function Customheaderback({title,isHome,navigation,category})
 { 
   return (
@@ -237,17 +198,18 @@ function Customheaderback({title,isHome,navigation,category})
 {
   /*
   
+
+
+  */
+}
+function CustomTopTabContent({navigation,initialParams})
+{
+  return (
   <ScrollView horizontal={true} style= {{maxHeight:35}}>
- 
     { 
       initialParams.map(item =>
       (
-
-        <TouchableOpacity style ={{flex:1.5,justifyContent:'center',paddingRight:14,paddingLeft:2}}
-            onPress = {
-                subCategorySelector(item)
-            }
-        >
+        <TouchableOpacity style ={{flex:1.5,justifyContent:'center',paddingRight:14,paddingLeft:2}} onPress = {() => navigation.navigate('HomeDetail',{'item':item})}>
           <View>
           <Text style = {{textAlign:'center'}}>{item.name}</Text>
           </View>
@@ -255,48 +217,14 @@ function Customheaderback({title,isHome,navigation,category})
       )) 
     }
   </ScrollView>
-
-
-  */
-}
-function subCategorySelector(item)
-{
-  Alert.alert(item)
-}
-
-
-function CustomTopTabContent({navigation,initialParams})
-{
-  let listViewRef;
-  const ItemView = ({ item }) => {
-    return (
-      <Text style={{padding:10}} onPress={() => {
-        subCategorySelector(item.name)
-      }}>
-        {item.name}
-      </Text>
-    );
-  };
-  return (
-    <ScrollView horizontal={true} style= {{maxHeight:50}}>
-  
-      <FlatList
-              keyExtractor = {(item) => item.id}
-              data = {initialParams}
-              horizontal={true}
-              renderItem={ItemView}
-              ref={(ref) => {
-                listViewRef = ref;
-              }}
-              
-            />
-    </ScrollView>
   )
 }
 
+//2
+
 function CustomDrawerContent(props) {
   return(
-    <SafeAreaProvider style={{flex :1}}>
+    <SafeAreaView style={{flex :1}}>
         <ScrollView style={{marginLeft:5}}>
         
           <TouchableOpacity
@@ -325,7 +253,7 @@ function CustomDrawerContent(props) {
             <Text>Corona</Text>
           </TouchableOpacity>        
         </ScrollView>
-    </SafeAreaProvider>
+    </SafeAreaView>
   )   
 }
 
@@ -335,7 +263,6 @@ function CustomView({navigation,initialParams})
 {
   return(
     <View style={styles.container}>
-
       <FlatList
         keyExtractor = {(item) => item.id}
         data = {initialParams}
@@ -360,22 +287,31 @@ function CustomView({navigation,initialParams})
 
 function CustomViewForPoll({navigation,initialParams})
 {
-  console.log(initialParams)
+  const [votevalue,setvotevalue] = useState(-1)
   return(
     <View style={styles.container}>
-    
       <FlatList
         keyExtractor = {(item) => item.id}
         data = {initialParams}
         renderItem = {({item}) => (
           <View style = {styles.card} >          
             <View style={{flex:1}}>
-            <View style= {{flex:1,alignContent:'center',justifyContent:'center'}}>
-            <Text style = {styles.text} >{item.question}</Text>
-            <CustomRadioButton option1 = {'sfa'} option2 = {'sfafd'} option3 = {'asfdaf'} option4 = {'sadfasfsa'}/>
-
-            </View>
-              <View style = {{flex:1,flexDirection:'row',height : 45,marginTop:5}}>
+              <Text style = {styles.text} >{item.question}</Text>
+              <Text></Text>
+              <View style={{}}>
+                <RadioForm
+                  buttonColor ={'black'}
+                  buttonSize = {25}
+                  buttonOuterSize = {26}
+                  radio_props={item.options}
+                  onPress = {(value) =>{
+                    setvotevalue(value)//2
+                  }}
+                  //style ={{flex:1.5,justifyContent:'center',paddingRight:14,paddingLeft:2}}
+                  initial = {-1}
+                />
+              </View>  
+              <View style = {{flexDirection:'row',height : 45,marginTop:5}}>
                 <View style={{flex:1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                  <Image
                   style={{width:25,height:25,}}
@@ -398,8 +334,8 @@ function CustomViewForPoll({navigation,initialParams})
                   <Text style={{paddingLeft:3}}>25+</Text>
                 </View>
                 <TouchableOpacity style={{flex:1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}                       
-                          onPress = {() => {
-                            navigation.navigate('SelectedToVote',{'item':item})}}
+                          onPress = {() => {//12
+                          navigation.navigate('SelectedToVote',{'item':item, 'value':votevalue})}}
                           >
                   <Text >More</Text>
                   <Image
@@ -415,8 +351,6 @@ function CustomViewForPoll({navigation,initialParams})
     </View>
   )
 }
-
-
 function ProfileScreen({navigation})
 {                       
   const [mypoll,setmypoll] = useState(true)
@@ -429,7 +363,7 @@ function ProfileScreen({navigation})
   const [mypollSize,setmypollSize] = useState(0)
 
   return(
-    <SafeAreaProvider style={{flex:1},styles.container}>
+    <SafeAreaView style={{flex:1},styles.container}>
       
         <View style={{flex:1.2,flexDirection:'column'}}>
         <Customheaderback navigation = {navigation} />
@@ -483,10 +417,11 @@ function ProfileScreen({navigation})
                     onPress = {()=> {
                         setmypoll(false)
                         setvoted(true)
-                        setmyvoteColor(2.5)                    
+                        setmyvoteColor(2.5) 
                         setmypollColor(0)
                         setmypollBold("400")
                         setmyvoteBold("700")
+
                   }}>                  
                     <Text style={{textAlign:'center',fontWeight: myvoteBold,fontFamily: "Cochin",fontSize:14}}>Voted</Text>
                 </TouchableOpacity>
@@ -503,7 +438,7 @@ function ProfileScreen({navigation})
 
           </View>
         </View>
-    </SafeAreaProvider>
+    </SafeAreaView>
   )
 }
 {
@@ -527,6 +462,8 @@ function reduce(state,action)
 
   */
 }
+
+
 function CustomBottomTabContent(props)
 {
 return(
@@ -539,6 +476,14 @@ return(
           <Text style = {{textAlign:'center',fontSize:11}}>Home</Text>
         </TouchableOpacity>
       </View>  
+      <View style ={{flex:1,justifyContent:'center',paddingRight:1,paddingLeft:1}}>
+
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Explore')}        
+        >
+          <Text style = {{textAlign:'center',fontSize:11}}>Explore</Text>
+        </TouchableOpacity>    
+      </View>
       <View style ={{flex:1,justifyContent:'center',paddingRight:1,paddingLeft:1}}>
         <TouchableOpacity
           onPress={() => props.navigation.navigate('CreateScreen',{screen : 'CreatePolls', params :{istab: true,category: '', subcategory : ''}}
@@ -582,248 +527,126 @@ return(
 //--------------------------------------------------------------------------------------------------------------
 //screen collections
 //--------------------------------------------------------------------------------------------------------------
-
-
-function CustomRadioButton({ option1,option2,option3,option4 }) {
-
-  const [a,seta] = useState(false)
-  const [b,setb] = useState(false)
-  const [c,setc] = useState(false)
-  const [d,setd] = useState(false)
-  const [result,setresult] = useState()
-
+function NotificationsScreen({ navigation }) {
+  const [option1,setoption1] = useState(0)
+  const [state,dispatch] = useReducer(states,reduce)
   return (
-    <View style = {{justifyContent:'center', alignContent:'center',padding:10}}>{/*container*/}
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+      <Text>{option1}</Text>
+      <Button onPress={() => dispatch('increment')} title="increment" />
+      <Button onPress={() => dispatch('decrement')} title="drecrement" />
+      <Text>{state.count}</Text>
 
-      <View style = {{flexDirection:'row',padding:5,height:50, alignContent:'center',justifyContent:'center',borderWidth:1,borderRadius:5,borderColor:'orange',marginBottom:5}}>{/*container for radio button and text*/}
-        <View style={{alignContent:'center',justifyContent:'center' ,flex:.1}}>
-          <TouchableOpacity style={{height:27,width:27,borderRadius:27,borderColor:'blue',borderWidth:3,justifyContent:'center',alignContent:'center'}}
-                            onPress = {() =>
-                              {
-                                seta(true)
-                                setb(false)
-                                setc(false)
-                                setd(false)
-                                setresult('a')
-                              }
-                            }
-                            >{/*outerRadius*/}
-            {a &&
-              <View style={{height:13,width:13,borderRadius:13,backgroundColor:'blue',borderColor:'red',marginLeft: "auto",marginRight: "auto"}}>{/*innerRadius*/}
-              </View>
-            }
-          </TouchableOpacity>
-        </View>
+      <TextInput
+      style={{ height: 39,width:100, borderColor: 'gray' }}
+      onChangeText={text => setoption1(text)}
+      placeholder="option1 "
+      value={option1}
+    />
 
-        <View style={{flex:.8,padding:10,}}>{/*text area*/}
-            <Text style={{marginLeft:5}}>{option1}</Text>
-
-        </View>                                      
-      </View>
- 
-
-
-      <View style = {{flexDirection:'row',padding:5,height:50, alignContent:'center',justifyContent:'center',borderWidth:1,borderRadius:5,borderColor:'orange',marginBottom:5}}>{/*container for radio button and text*/}
-        <View style={{alignContent:'center',justifyContent:'center' ,flex:.1}}>
-          <TouchableOpacity style={{height:27,width:27,borderRadius:27,borderColor:'blue',borderWidth:3,justifyContent:'center',alignContent:'center'}}
-                            onPress = {() =>
-                              {
-                                seta(false)
-                                setb(true)
-                                setc(false)
-                                setd(false)
-                                setresult('b')
-                              }
-                            }
-                            >{/*outerRadius*/}
-            {b &&
-              <View style={{height:13,width:13,borderRadius:13,backgroundColor:'blue',borderColor:'red',marginLeft: "auto",marginRight: "auto"}}>{/*innerRadius*/}
-              </View>
-            }
-          </TouchableOpacity>
-        </View>
-
-        <View style={{flex:.8,padding:10,}}>{/*text area*/}
-            <Text style={{marginLeft:5}}>{option2}</Text>
-
-        </View>                                      
-      </View>
-
-
-
-      <View style = {{flexDirection:'row',padding:5,height:50, alignContent:'center',justifyContent:'center',borderWidth:1,borderRadius:5,borderColor:'orange',marginBottom:5}}>{/*container for radio button and text*/}
-        <View style={{alignContent:'center',justifyContent:'center' ,flex:.1}}>
-          <TouchableOpacity style={{height:27,width:27,borderRadius:27,borderColor:'blue',borderWidth:3,justifyContent:'center',alignContent:'center'}}
-                            onPress = {() =>
-                              {
-                                seta(false)
-                                setb(false)
-                                setc(true)
-                                setd(false)
-                                setresult('c')
-                              }
-                            }
-                            >{/*outerRadius*/}
-            {c &&
-              <View style={{height:13,width:13,borderRadius:13,backgroundColor:'blue',borderColor:'red',marginLeft: "auto",marginRight: "auto"}}>{/*innerRadius*/}
-              </View>
-            }
-          </TouchableOpacity>
-        </View>
-
-        <View style={{flex:.8,padding:10,}}>{/*text area*/}
-            <Text style={{marginLeft:5}}>{option3}</Text>
-
-        </View>                                      
-      </View>
-
-
-
-      <View style = {{flexDirection:'row',padding:5,height:50, alignContent:'center',justifyContent:'center',borderWidth:1,borderRadius:5,borderColor:'orange',marginBottom:5}}>{/*container for radio button and text*/}
-        <View style={{alignContent:'center',justifyContent:'center' ,flex:.1}}>
-          <TouchableOpacity style={{height:27,width:27,borderRadius:27,borderColor:'blue',borderWidth:3,justifyContent:'center',alignContent:'center'}}
-                            onPress = {() =>
-                              {
-                                seta(false)
-                                setb(false)
-                                setc(false)
-                                setd(true)
-                                setresult('d')
-
-                              }
-                            }
-                            >{/*outerRadius*/}
-            {d &&
-              <View style={{height:13,width:13,borderRadius:13,backgroundColor:'blue',borderColor:'red',marginLeft: "auto",marginRight: "auto"}}>{/*innerRadius*/}
-              </View>
-            }
-          </TouchableOpacity>
-        </View>
-
-        <View style={{flex:.8,padding:10,}}>{/*text area*/}
-            <Text style={{marginLeft:5}}>{option4}</Text>
-
-        </View>                                      
-      </View>
     </View>
   );
 }
+class ExploreScreen extends Component {  
+  state = {  
+      switchValue: null  
+  };  
+  render() {  
+      return (  
+          <View style={{flex: 1,  
+            alignItems: 'center',  
+            justifyContent: 'center',  }}>  
+              <Text style={styles.textStyle}>Switch Example</Text>  
+              <Text style={styles.textStyle}>{this.state.switchValue ? 'on' :'off'}</Text>  
+              <Switch  
+                  value={this.state.switchValue}  
+                  onValueChange ={(switchValue)=>{this.setState({switchValue})
+                  console.log(this.state.switchValue)}}/>  
+          </View>  
+      );  
+  }  
+}  
+
+
+//          <CustomView  navigation = {navigation} initialParams = {route.params.view} />
+//*
 
 function HomeScreen({route,navigation}) {
-  const switchfeeds = route.params.view.category
-  const switchpoll = route.params.view.category+'News'
-  const [feed,dispatch] = useReducer(reducer,isShow)
-  const isPollContextContext = useContext(isPollContext)
-  console.log(switchfeeds,switchpoll)
-  const title = "home"
-  const [poll, setpoll] = useState(0)
-  console.log(route.params.polls)
-
   return (
-      <SafeAreaProvider style={{flex:1}}>
-      <View >
-         <View style = {{flexDirection:'row',height : 50}}>
-
-          <TouchableOpacity onPress = {()=>navigation.openDrawer()}>
-
-            <View style ={{flex:1, justifyContent:'center'}}>
-              <Image
-                style={{width:30,height:30,marginLeft:5}}
-                source = {require('./src/image/menu.png')}
-              />
-            </View>
-          </TouchableOpacity>
-          <View style ={{flex:1.5,justifyContent:'center'}}>
-        <Text style = {{textAlign:'center'}}>{title}</Text>
-      </View>
-      <View style ={{flex:2,flexDirection:'row',height : 50}}>
-      <View style ={{flex:2,justifyContent:'center'}}>
-        <Text style = {{textAlign:'center'}}>news feed</Text>
-      </View>
-      <Switch  
-        value= {feed}  
-        onValueChange ={(switchValue)=>{
-            dispatch(feed)
-          }}/>  
-      <View style ={{flex:1.5,justifyContent:'center'}}>
-        <Text style = {{textAlign:'center'}}>poll</Text>
-      </View>
-      
-      </View>
-    </View>        
-      </View>
-      <CustomTopTabContent  navigation = {navigation} initialParams = {route.params.tab}/>
-      <View style = {{flex :1}}>
-
-      {
-        !feed && 
-        <CustomView navigation = {navigation} initialParams = {route.params.view} />
-      }
-      {feed && 
-        <CustomViewForPoll navigation = {navigation} initialParams = {route.params.polls} />
-
-      }
-
-      </View>
-     </SafeAreaProvider>
+      <SafeAreaView style={{flex:1}}>
+          <Customheader title = "Home" isHome = {true} navigation = {navigation} category = {route.params.view}/>
+          <CustomTopTabContent  navigation = {navigation} initialParams = {route.params.tab}/>
+          <CustomView  navigation = {navigation} initialParams = {route.params.view} />
+     </SafeAreaView>
   );
 }
-                           
-function VoteScreenVoteScreen({route,navigation})
+
+function PollScreen({route,navigation}) {
+  return (
+      <SafeAreaView style={{flex:1}}>
+          <Customheader title = "Poll" isHome = {true} navigation = {navigation} category = {route.params.view}/>
+          <CustomTopTabContent  navigation = {navigation} initialParams = {route.params.tab}/>
+          <CustomViewForPoll  navigation = {navigation} initialParams = {route.params.view} />
+      </SafeAreaView>
+  );
+}
+//      <Text>{route.params.item.question}</Text>
+//<Text>{route.params.value}</Text>
+
+
+
 {
-  const isPollContextContext = useContext(isPollContext)
-  const [vote,setvote] = useState(true)
-  return(
-    <TouchableOpacity 
-    onPress = {()=>{
-      navigation.goBack()
-    }}>
-      <Text>hello world!</Text>
-      
-    </TouchableOpacity>
+  /*
+  (
+    <View style = {{flex:1,marginTop:10,marginRight:20,justifyContext:'center',marginBottom:10}}>
+      <View style={{flex:.5,height:150,flexDirection:'row',paddingLeft:10,paddingTop:10,height:200}}>
+        <Image
+          style={{width:100,height:100,marginLeft:5}}
+          source = {require('./src/image/admk.jpg')}        
+        />
+        <Text style={{width:240,fontSize:17,height:50,marginLeft:10,marginRight:20}}>{route.params.item.question}</Text>
+      </View>
+      <View horizontal = {true} style={{flex:2.5,paddingLeft:10,paddingTop:10,height:150}}>
+        <View style={{flex:.7,flexDirection:'row'}}>
+          <RadioForm
+
+          
+          Color ={'black'}
+            buttonSize = {25}
+            buttonOuterSize = {26}
+            style={{borderColor:'black',borderWidth:1,width:329}}
+            radio_props={route.params.item.options}
+            onPress = {(value) =>{
+              setvotevalue(value)//2
+            }}//vote
+            //style ={{flex:1.5,justifyContent:'center',paddingRight:14,paddingLeft:2}}
+            initial = {-1}
+          />
+        </View> 
+        <TouchableOpacity style={{backgroundColor:'pink',flex:.25,borderRadius:10,paddingBottom:1,alignItem:'center',justifyContent:'center'}}
+                  onPress = {()=> {
+                    setvote(null)
+                    setcomments(true)
+                  }}>  
+            <Text>vote</Text>
+          </TouchableOpacity>
+        </View>    
+        <View style={{width:329,height:50,flex:1,backgroundColor:'red'}}></View>  
+
+    
+    </View>
   )
+  
+  */
 }
-
-function voteS({route,navigation})
-{
-
-  const isPollContextContext = useContext(isPollContext)
-  const [vote,setvote] = useState(true)
-  return(
-    <TouchableOpacity 
-    onPress = {()=>{
-      navigation.navigate('samp')
-    }}>
-      <Text>hello world!</Text>
-      
-    </TouchableOpacity>
-  ) 
-}
-
-
-function Samp({route,navigation})
-{
-
-  const isPollContextContext = useContext(isPollContext)
-  const [vote,setvote] = useState(true)
-  return(
-    <TouchableOpacity 
-    onPress = {()=>{
-      navigation.dispatch(CommonActions.goBack())    }}>
-      <Text>here it is samp</Text>
-      
-    </TouchableOpacity>
-  )
-}
-
 
 function VoteScreen({route,navigation})
 {
   const isPollContextContext = useContext(isPollContext)
   const [vote,setvote] = useState(true)
-  console.log("hii you have entered stalin")
   return(
-    <SafeAreaProvider style={{flex:1,alignItem:'center',justifyContent:'center',backgroundColor:'white'}}>
+    <SafeAreaView style={{flex:1,alignItem:'center',justifyContent:'center',backgroundColor:'white'}}>
         <Customheaderback navigation = {navigation} />
 
         <View style={{flex:.7,alignItem:'center',flexDirection:'row',justifyContent:'center',backgroundColor:'white',marginBottom:5,marginTop:10,marginLeft:10,marginRight:10}}>
@@ -838,11 +661,20 @@ function VoteScreen({route,navigation})
 
         </View>
 
-       {vote && <View style={{flex:2.5,alignItem:'center',justifyContent:'center',backgroundColor:'white',marginBottom:5,marginTop:6,marginLeft:10,marginRight:10}}>
+       {vote && <View style={{flex:1.5,alignItem:'center',justifyContent:'center',backgroundColor:'white',marginBottom:5,marginTop:6,marginLeft:10,marginRight:10}}>
             <View style={{flex:1,paddingLeft:10,paddingRight:10,paddingTop:10,backgroundColor:'white',marginBottom:5}}>
-
-            <CustomRadioButton option1 = {'sfa'} option2 = {'sfafd'} option3 = {'asfdaf'} option4 = {'sadfasfsa'}/>
-
+                <RadioForm
+                buttonColor ={'black'}
+                buttonSize = {25}
+                buttonOuterSize = {26}
+                style={{width:319}}
+                radio_props={route.params.item.options}
+                onPress = {(value) =>{
+                  setvotevalue(value)//2
+                }}//vote
+                //style ={{flex:1.5,justifyContent:'center',paddingRight:14,paddingLeft:2}}
+                initial = {-1}
+              />
             </View>
               <Button
               title="Learn More"
@@ -972,7 +804,7 @@ function VoteScreen({route,navigation})
               </View>
             </View>
         }
-    </SafeAreaProvider>
+    </SafeAreaView>
   )
 }
 
@@ -981,8 +813,10 @@ function VoteScreen({route,navigation})
 
 //1
 function ViewScreen({ route,navigation }) {
+  console.log("hloo")
+  console.log("bye")
   return (
-    <SafeAreaProvider style={{flex:1}}>
+    <SafeAreaView style={{flex:1}}>
       <Customheaderback navigation = {navigation} category = {route.params.view}/>
       <View>
         <Image
@@ -1030,7 +864,7 @@ function ViewScreen({ route,navigation }) {
           <Text style = {{textAlign:'center',color: "red"}}>Create poll</Text>
         </TouchableOpacity>
         </View>
-  </SafeAreaProvider>
+  </SafeAreaView>
   );
 }
 {
@@ -1085,7 +919,7 @@ function CreatePollScreen({route,navigation})
       const cat = route.params.category
       const subcat = route.params.subcategory
       return (  
-        <SafeAreaProvider style={{flexDirection:'column',flex:1}}>
+        <SafeAreaView style={{flexDirection:'column',flex:1}}>
 
               <Modal
                 animationType="fade"
@@ -1325,8 +1159,8 @@ function CreatePollScreen({route,navigation})
               <View style={{flex:2,marginLeft:23,}}>  
                 <Text style={{color:'#4B0082',fontSize:18}}>Default - After Poll</Text>
               </View>  
-             </View>   
-          </SafeAreaProvider>
+             </View>  
+          </SafeAreaView>
       );  
     }
 
@@ -1915,12 +1749,11 @@ export default function App() {
       <Stack.Navigator initialRouteName = "DrawerView">
         <Stack.Screen name="DrawerView" component={DrawerNavigation} options ={navOptionHandler}/>
         <Stack.Screen name="signup" component={SignupPage} options ={navOptionHandler}/>
-        <Stack.Screen name="TestForTemporary" component={CustomRadioButton} options ={navOptionHandler}/>
-
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
 
 function DrawerNavigation(props)
 {
@@ -1932,11 +1765,9 @@ function DrawerNavigation(props)
         params:
         {
           tab:cricket,
-          view:people,
-          polls:peoplenews
+          view:people
         }
-      }    
-
+      }
   }
   const Politics = {
     screen:'HomeTab',
@@ -1946,8 +1777,7 @@ function DrawerNavigation(props)
         params:
         {
           tab:politices,
-          view:politicspeople,
-          polls:politicspeoplenews
+          view:politicspeople
         }
       }
   }
@@ -1959,12 +1789,10 @@ function DrawerNavigation(props)
         params:
         {
           tab:corona,
-          view:coronapeople,
-          polls:coronapeoplenews
+          view:coronapeople
         }
-      } 
+      }
   }
-
   return(
     <isPollContext.Provider value = {props}>
       <Drawer.Navigator initialRouteName="Cricket"
@@ -1973,37 +1801,28 @@ function DrawerNavigation(props)
         <Drawer.Screen name="Politics" component={TabNavigation} initialParams = {Politics} />
         <Drawer.Screen name="Corona" component={TabNavigation} initialParams = {Corona} />    
         <Drawer.Screen name="Selected" component={ViewScreen} />
-        <Drawer.Screen name="CreateScreen" component={CreatePollStack}/>
         <Drawer.Screen name="SelectedToVote" component={VoteScreen}/>
-        <Drawer.Screen name="vote" component={ViewStack}/>
-
+        <Drawer.Screen name="CreateScreen" component={CreatePollStack}/>
+        <Drawer.Screen name="CricketNews" component={TabNavigation} initialParams = {{screen:'HomeTab',params:{screen:'polls',params:{tab:cricket,view:peoplenews}}}}/>
+        <Drawer.Screen name="PoliticsNews" component={TabNavigation} initialParams = {{screen:'HomeTab',params:{screen:'polls',params:{tab:politices,view:politicspeoplenews}}}}/>
+        <Drawer.Screen name="CoronaNews" component={TabNavigation} initialParams = {{screen:'HomeTab',params:{screen:'polls',params:{tab:corona,view:coronapeoplenews}}}} />    
       </Drawer.Navigator>
-    </isPollContext.Provider>
+      </isPollContext.Provider>
   )
 }
+
 //      <Drawer.Screen name="CreateScreen" component={CreatePollStack} initialParams = {{screen : 'CreatePolls', params :{istab: true}}}/> worked
 
 function TabNavigation()
 {
   return(
-      <Tab.Navigator initialRouteName="Notification" tabBar={props => <CustomBottomTabContent {...props} />}>
+      <Tab.Navigator initialRouteName="Profile" tabBar={props => <CustomBottomTabContent {...props} />}>
         <Tab.Screen name="Profile" component={ProfileStack} />      
         <Tab.Screen name="HomeTab" component={HomeStack} />
+        <Tab.Screen name="Explore" component={ExploreStack} />
+        <Tab.Screen name="CreatePoll" component={CreatePollStack} />
         <Tab.Screen name="Notification" component={NotificationStack} />
       </Tab.Navigator>
-  )
-}
-
-
-function ViewStack()
-{
-  return(
-  <Stack.Navigator initialRouteName = "SelectedToVote">
-    <Stack.Screen name="SelectedToVote" component={VoteScreen} options ={navOptionHandler}/>
-    <Stack.Screen name="ForTesting" component={Samp} options ={navOptionHandler}/>
-
-  </Stack.Navigator>
-
   )
 }
 
@@ -2011,6 +1830,16 @@ function HomeStack({naivgation}){
   return (
     <Stack.Navigator initialRouteName = "Home">
       <Stack.Screen name="Home" component={HomeScreen} options ={navOptionHandler}/>
+      <Stack.Screen name="polls" component={PollScreen} options ={navOptionHandler}/>
+
+    </Stack.Navigator>
+  )
+}
+
+function ExploreStack(){ 
+  return (
+    <Stack.Navigator initialRouteName = "Explore">
+      <Stack.Screen name="Explore" component={ExploreScreen} options ={navOptionHandler}/>
     </Stack.Navigator>
   )
 }

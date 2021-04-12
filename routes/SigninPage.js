@@ -13,7 +13,6 @@ const axios = require('axios');
 
 Stack = createStackNavigator();
 
-
 class SigninPage extends Component 
 {
     constructor(props)
